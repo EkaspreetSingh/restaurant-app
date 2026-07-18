@@ -1,0 +1,111 @@
+<div class="home-page fade-in">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <span class="hero-subtitle">Welcome to Kimaya's Kitchen</span>
+      <h1 class="hero-title">A Magical Fusion of <br><span class="gold-text">Spice & Luxury</span></h1>
+      <p class="hero-desc">
+        Experience exquisite Indian-fusion dining crafted by master chefs. Indulge in classic flavors reimagined with a modern, artistic touch.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/menu" class="btn btn-primary">Explore Menu</a>
+        <a routerLink="/reservations" class="btn btn-secondary">Reserve Table</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span class="mouse">
+        <span class="wheel"></span>
+      </span>
+      <span class="label">Scroll Down</span>
+    </div>
+  </section>
+
+  <!-- About Preview Section -->
+  <section class="about-preview">
+    <div class="container grid-container">
+      <div class="about-text">
+        <span class="section-subtitle">Our Philosophy</span>
+        <h2 class="section-title text-left">The Art of Culinary Alchemy</h2>
+        <p>
+          "Kimaya" represents magic, mystery, and divine alchemy. In our kitchen, this translates to taking traditional Indian recipes and transforming them through modern culinary techniques and global flavors.
+        </p>
+        <p>
+          From smoking our spices in-house to curating an atmosphere that feels both historic and ultra-modern, we invite you to take a journey of sensory delight.
+        </p>
+        <div class="about-actions">
+          <a routerLink="/about" class="btn btn-secondary">Read Our Story</a>
+        </div>
+      </div>
+      <div class="about-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800" alt="Plating a signature dish" class="about-img">
+        <div class="border-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hot/Featured Items Section -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Specials of the House</span>
+        <h2 class="section-title">Hot & Popular Items</h2>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-state" *ngIf="loading$ | async">
+        <div class="spinner"></div>
+        <p>Curating our best dishes...</p>
+      </div>
+
+      <!-- Items Grid -->
+      <div class="featured-grid" *ngIf="!(loading$ | async)">
+        <div *ngFor="let item of (hotItems$ | async)" class="grid-item">
+          <app-menu-card [item]="item"></app-menu-card>
+        </div>
+      </div>
+      
+      <div class="featured-footer">
+        <p>All our sections refer directly to the same centralized food items list for easy editing.</p>
+        <a routerLink="/menu" class="btn btn-primary">View Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QR Table Promo Section -->
+  <section class="qr-promo">
+    <div class="container grid-container">
+      <div class="qr-promo-image-wrapper">
+        <!-- We will generate a mock phone displaying the menu QR code -->
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=400" alt="Menu on phone" class="screen-img">
+            <div class="screen-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#dfb05b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <rect x="7" y="7" width="3" height="3"></rect>
+                <rect x="14" y="7" width="3" height="3"></rect>
+                <rect x="7" y="14" width="3" height="3"></rect>
+                <path d="M14 14h3v3h-3z"></path>
+              </svg>
+              <span>Scan to Dine</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="qr-promo-text">
+        <span class="section-subtitle">Modern Dining Experience</span>
+        <h2 class="section-title text-left">Contactless QR Menu</h2>
+        <p>
+          Dining with us? Simply scan the QR code located on your table to instantly view our digital menu and place your order directly.
+        </p>
+        <p>
+          For managers, we offer a dedicated dashboard to generate and print tablespecific QR codes in seconds.
+        </p>
+        <div class="qr-promo-actions">
+          <a routerLink="/table-qr" class="btn btn-secondary">Generate Table QR</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

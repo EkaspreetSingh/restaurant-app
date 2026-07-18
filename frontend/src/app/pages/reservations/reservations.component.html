@@ -1,0 +1,267 @@
+<!-- ═══════════════ Page Banner ═══════════════ -->
+<section class="reservation-banner">
+  <div class="banner-overlay"></div>
+  <div class="banner-content fade-in">
+    <span class="section-subtitle">Experience Elegance</span>
+    <h1 class="banner-title">Reserve Your Table</h1>
+    <p class="banner-text">
+      Indulge in an unforgettable dining experience. Secure your place at Kimaya's Kitchen
+      and let us craft an evening of exquisite flavours and impeccable hospitality.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ Reservation Section ═══════════════ -->
+<section class="reservation-section">
+  <div class="container">
+
+    <!-- Success Message -->
+    <div class="message-toast success-toast" *ngIf="successMessage">
+      <div class="toast-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <div class="toast-body">
+        <strong>Reservation Confirmed</strong>
+        <p>{{ successMessage }}</p>
+      </div>
+      <button class="toast-close" (click)="dismissSuccess()">&times;</button>
+    </div>
+
+    <!-- Error Message -->
+    <div class="message-toast error-toast" *ngIf="errorMessage">
+      <div class="toast-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="15" y1="9" x2="9" y2="15"/>
+          <line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+      </div>
+      <div class="toast-body">
+        <strong>Reservation Failed</strong>
+        <p>{{ errorMessage }}</p>
+      </div>
+      <button class="toast-close" (click)="dismissError()">&times;</button>
+    </div>
+
+    <div class="reservation-grid">
+
+      <!-- ═══════ Booking Form ═══════ -->
+      <div class="form-card fade-in">
+        <div class="card-header">
+          <span class="section-subtitle">Book a Table</span>
+          <h2 class="card-title">Make a Reservation</h2>
+        </div>
+
+        <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="reservation-form" novalidate>
+
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name">Full Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              placeholder="Your full name"
+              [class.input-error]="f['name'].touched && f['name'].invalid"
+            />
+            <div class="error-text" *ngIf="f['name'].touched && f['name'].errors">
+              <span *ngIf="f['name'].errors?.['required']">Name is required.</span>
+              <span *ngIf="f['name'].errors?.['minlength']">Name must be at least 2 characters.</span>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="your@email.com"
+              [class.input-error]="f['email'].touched && f['email'].invalid"
+            />
+            <div class="error-text" *ngIf="f['email'].touched && f['email'].errors">
+              <span *ngIf="f['email'].errors?.['required']">Email is required.</span>
+              <span *ngIf="f['email'].errors?.['email']">Please enter a valid email address.</span>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              formControlName="phone"
+              placeholder="+91 98765 43210"
+              [class.input-error]="f['phone'].touched && f['phone'].invalid"
+            />
+            <div class="error-text" *ngIf="f['phone'].touched && f['phone'].errors">
+              <span *ngIf="f['phone'].errors?.['required']">Phone number is required.</span>
+              <span *ngIf="f['phone'].errors?.['pattern']">Please enter a valid phone number.</span>
+            </div>
+          </div>
+
+          <!-- Date & Time Row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Date <span class="required">*</span></label>
+              <input
+                type="date"
+                id="date"
+                formControlName="date"
+                [min]="minDate"
+                [class.input-error]="f['date'].touched && f['date'].invalid"
+              />
+              <div class="error-text" *ngIf="f['date'].touched && f['date'].errors">
+                <span *ngIf="f['date'].errors?.['required']">Date is required.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="time">Time <span class="required">*</span></label>
+              <select
+                id="time"
+                formControlName="time"
+                [class.input-error]="f['time'].touched && f['time'].invalid"
+              >
+                <option value="" disabled>Select a time</option>
+                <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+              </select>
+              <div class="error-text" *ngIf="f['time'].touched && f['time'].errors">
+                <span *ngIf="f['time'].errors?.['required']">Time is required.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guests -->
+          <div class="form-group">
+            <label for="guests">Number of Guests <span class="required">*</span></label>
+            <select
+              id="guests"
+              formControlName="guests"
+              [class.input-error]="f['guests'].touched && f['guests'].invalid"
+            >
+              <option *ngFor="let g of guestOptions" [ngValue]="g">
+                {{ g }} {{ g === 1 ? 'Guest' : 'Guests' }}
+              </option>
+            </select>
+            <div class="error-text" *ngIf="f['guests'].touched && f['guests'].errors">
+              <span *ngIf="f['guests'].errors?.['required']">Please select the number of guests.</span>
+            </div>
+          </div>
+
+          <!-- Special Requests -->
+          <div class="form-group">
+            <label for="specialRequests">Special Requests</label>
+            <textarea
+              id="specialRequests"
+              formControlName="specialRequests"
+              rows="4"
+              placeholder="Dietary requirements, celebrations, seating preferences..."
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="btn btn-primary submit-btn"
+            [disabled]="isSubmitting"
+          >
+            <span *ngIf="!isSubmitting">Confirm Reservation</span>
+            <span *ngIf="isSubmitting" class="btn-loading">
+              <span class="btn-spinner"></span>
+              Processing...
+            </span>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- ═══════ Side Panel ═══════ -->
+      <aside class="info-panel fade-in">
+
+        <!-- Hours Card -->
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="info-card-title">Opening Hours</h3>
+          <ul class="hours-list">
+            <li>
+              <span class="day">Monday – Friday</span>
+              <span class="time">12:00 PM – 10:00 PM</span>
+            </li>
+            <li>
+              <span class="day">Saturday</span>
+              <span class="time">11:00 AM – 11:00 PM</span>
+            </li>
+            <li>
+              <span class="day">Sunday</span>
+              <span class="time">11:00 AM – 9:00 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Location Card -->
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3 class="info-card-title">Our Location</h3>
+          <p class="info-text">
+            42 Grand Spice Avenue<br/>
+            Connaught Place, New Delhi<br/>
+            India – 110001
+          </p>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07
+                       19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18
+                       2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81
+                       a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27
+                       a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3 class="info-card-title">Contact Us</h3>
+          <p class="info-text">
+            <a href="tel:+911234567890" class="info-link">+91 123 456 7890</a>
+          </p>
+          <p class="info-text">
+            <a href="mailto:reservations@kimayaskitchen.com" class="info-link">reservations&#64;kimayaskitchen.com</a>
+          </p>
+        </div>
+
+        <!-- Policy Note -->
+        <div class="info-card policy-card">
+          <h3 class="info-card-title">Reservation Policy</h3>
+          <ul class="policy-list">
+            <li>Reservations are held for 15 minutes past the booked time.</li>
+            <li>For parties larger than 8, please call us directly.</li>
+            <li>A confirmation email will be sent upon booking.</li>
+            <li>Cancellations must be made at least 4 hours in advance.</li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>

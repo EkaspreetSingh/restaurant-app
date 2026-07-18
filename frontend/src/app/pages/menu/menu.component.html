@@ -1,0 +1,148 @@
+<div class="menu-page fade-in">
+  <div class="menu-banner">
+    <div class="banner-overlay"></div>
+    <div class="container banner-content">
+      <span class="banner-subtitle">Exquisite Gastronomy</span>
+      <h1 class="banner-title">Our Menu</h1>
+      <p class="banner-desc">
+        Explore our curated collection of culinary masterpieces. Every dish is crafted from fresh ingredients, spiced to perfection, and plated with precision.
+      </p>
+    </div>
+  </div>
+
+  <section class="menu-content-section">
+    <div class="container">
+      
+      <!-- Toolbar: Filters + Search + Admin Access -->
+      <div class="menu-toolbar">
+        <!-- Categories -->
+        <div class="category-tabs">
+          <button 
+            *ngFor="let cat of categories" 
+            class="tab-btn" 
+            [class.active]="selectedCategory === cat"
+            (click)="selectCategory(cat)">
+            {{ cat }}
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+          <input 
+            type="text" 
+            placeholder="Search dish name or flavor..." 
+            [(ngModel)]="searchQuery" 
+            class="search-input">
+          <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Admin Customizer Trigger -->
+        <button class="btn btn-secondary customize-trigger" (click)="toggleAdminPanel()">
+          {{ showAdminPanel ? 'Close Customizer' : 'Add New Item' }}
+        </button>
+      </div>
+
+      <!-- Admin Customization Panel -->
+      <div class="admin-panel" *ngIf="showAdminPanel">
+        <div class="admin-header">
+          <h3>Add New Dish to Database</h3>
+          <p>Additions instantly sync across the website, including the home page specials and menus.</p>
+        </div>
+
+        <form [formGroup]="menuForm" (ngSubmit)="onSubmit()" class="admin-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Dish Name *</label>
+              <input type="text" id="name" formControlName="name" placeholder="e.g. Kashmiri Lamb Rogan Josh">
+            </div>
+
+            <div class="form-group">
+              <label for="price">Price ($) *</label>
+              <input type="number" id="price" formControlName="price" placeholder="e.g. 18.99" step="0.01">
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category *</label>
+              <select id="category" formControlName="category">
+                <option value="Appetizers">Appetizers</option>
+                <option value="Mains">Mains</option>
+                <option value="Desserts">Desserts</option>
+                <option value="Beverages">Beverages</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="image">Image URL (Optional)</label>
+              <input type="text" id="image" formControlName="image" placeholder="Paste image link, or leave blank for a default placeholder">
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="description">Description *</label>
+            <textarea id="description" formControlName="description" rows="3" placeholder="Describe the ingredients, spice levels, and presentation..."></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Tags / Badges</label>
+            <div class="checkbox-grid">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="tagHot"> Hot / Spicy
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="tagChefSpecial"> Chef's Special
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="tagVegetarian"> Vegetarian
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="tagPopular"> Popular Item
+              </label>
+            </div>
+          </div>
+
+          <div class="form-messages">
+            <div class="alert alert-success" *ngIf="formSuccessMsg">{{ formSuccessMsg }}</div>
+            <div class="alert alert-danger" *ngIf="formErrorMsg">{{ formErrorMsg }}</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save to Database</button>
+            <button type="button" class="btn btn-secondary" (click)="toggleAdminPanel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Menu Grid Content -->
+      <!-- Loading -->
+      <div class="loading-state" *ngIf="loading$ | async">
+        <div class="spinner"></div>
+        <p>Loading our master menu...</p>
+      </div>
+
+      <!-- Main Display -->
+      <div *ngIf="!(loading$ | async)">
+        <div class="menu-grid" *ngIf="filteredItems.length > 0">
+          <div *ngFor="let item of filteredItems" class="menu-grid-item">
+            <app-menu-card [item]="item"></app-menu-card>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="filteredItems.length === 0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          <h3>No dishes found</h3>
+          <p>We couldn't find any dishes matching your filters or search criteria. Try a different search query!</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>

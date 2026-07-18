@@ -1,0 +1,496 @@
+/* ═══════════════════════════════════════════
+   RESERVATIONS PAGE – Kimaya's Kitchen
+   ═══════════════════════════════════════════ */
+
+/* ──── Banner ──── */
+.reservation-banner {
+  position: relative;
+  height: 45vh;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(10, 10, 10, 0.92) 0%,
+      rgba(20, 20, 20, 0.85) 50%,
+      rgba(10, 10, 10, 0.92) 100%
+    ),
+    url('/assets/images/reservation-banner.jpg') center / cover no-repeat;
+  overflow: hidden;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(223, 176, 91, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 0 1.5rem;
+}
+
+.banner-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.banner-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ──── Main Section ──── */
+.reservation-section {
+  padding: 5rem 0 6rem;
+}
+
+/* ──── Grid Layout ──── */
+.reservation-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ──── Form Card ──── */
+.form-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 2.8rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+.card-header {
+  margin-bottom: 2.2rem;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-text-light);
+  margin-top: 0.4rem;
+}
+
+/* ──── Form Styles ──── */
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-group label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-text-muted);
+}
+
+.required {
+  color: var(--color-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a3a3a3' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(163, 163, 163, 0.5);
+}
+
+/* Focus States */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(223, 176, 91, 0.1), 0 0 15px rgba(223, 176, 91, 0.05);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Error States */
+.input-error {
+  border-color: var(--color-danger) !important;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1) !important;
+}
+
+.error-text {
+  font-size: 0.78rem;
+  color: var(--color-danger);
+  font-weight: 500;
+  margin-top: 0.15rem;
+}
+
+/* Date Input Color Fix */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(0.5) hue-rotate(5deg) saturate(3);
+  cursor: pointer;
+}
+
+/* Row Layout */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Textarea */
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  letter-spacing: 2px;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(10, 10, 10, 0.2);
+  border-top-color: var(--color-bg-dark);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ──── Side Info Panel ──── */
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 1.8rem 1.6rem;
+  transition: border-color var(--transition-normal);
+}
+
+.info-card:hover {
+  border-color: rgba(223, 176, 91, 0.3);
+}
+
+.info-card-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.info-card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.info-card-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.info-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
+}
+
+.info-link {
+  color: var(--color-primary);
+  transition: color var(--transition-fast);
+}
+
+.info-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Hours List */
+.hours-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.hours-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(223, 176, 91, 0.07);
+}
+
+.hours-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hours-list .day {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.hours-list .time {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
+/* Policy Card */
+.policy-card {
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, rgba(223, 176, 91, 0.03) 100%);
+}
+
+.policy-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.policy-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.policy-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-primary);
+  font-size: 0.5rem;
+  line-height: 2.6;
+}
+
+/* ──── Toast Notifications ──── */
+.message-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid;
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-toast {
+  background: rgba(22, 163, 74, 0.08);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+.success-toast .toast-icon {
+  color: var(--color-success);
+}
+
+.error-toast {
+  background: rgba(234, 88, 12, 0.08);
+  border-color: rgba(234, 88, 12, 0.3);
+}
+
+.error-toast .toast-icon {
+  color: var(--color-danger);
+}
+
+.toast-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+}
+
+.toast-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.toast-body {
+  flex: 1;
+}
+
+.toast-body strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-bottom: 0.3rem;
+}
+
+.toast-body p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0 0.3rem;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.toast-close:hover {
+  color: var(--color-text-light);
+}
+
+/* ──── Responsive ──── */
+@media (max-width: 1024px) {
+  .reservation-grid {
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .reservation-banner {
+    height: 35vh;
+    min-height: 280px;
+  }
+
+  .banner-title {
+    font-size: 2.2rem;
+  }
+
+  .banner-text {
+    font-size: 0.95rem;
+  }
+
+  .reservation-section {
+    padding: 3rem 0 4rem;
+  }
+
+  .reservation-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .form-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .info-panel {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-title {
+    font-size: 1.8rem;
+  }
+
+  .form-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+}

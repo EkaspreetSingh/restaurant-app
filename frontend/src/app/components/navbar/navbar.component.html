@@ -1,0 +1,56 @@
+<header class="navbar-header">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-logo" (click)="closeMobileMenu()">
+      <span class="logo-main">KIMAYA'S</span>
+      <span class="logo-sub">KITCHEN</span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="navbar-nav">
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
+      <a routerLink="/menu" routerLinkActive="active-link" class="nav-link">Menu</a>
+      <a routerLink="/about" routerLinkActive="active-link" class="nav-link">About</a>
+      <a routerLink="/reservations" routerLinkActive="active-link" class="nav-link">Reservations</a>
+      <a routerLink="/table-qr" routerLinkActive="active-link" class="nav-link">Table QR</a>
+    </nav>
+
+    <!-- Right Side Actions -->
+    <div class="navbar-actions">
+      <!-- Cart Icon -->
+      <a routerLink="/cart" class="cart-btn" aria-label="Shopping Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
+          <circle cx="8" cy="21" r="1"/>
+          <circle cx="19" cy="21" r="1"/>
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+        </svg>
+        <span class="cart-badge" *ngIf="(cartCount$ | async) as count">{{ count }}</span>
+      </a>
+
+      <!-- Quick Reservation Button -->
+      <a routerLink="/reservations" class="btn btn-primary nav-reserve-btn">Book Table</a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-toggle" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle Navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div class="mobile-nav-menu" [class.open]="isMobileMenuOpen">
+    <nav class="mobile-nav-links">
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="mobile-nav-link" (click)="closeMobileMenu()">Home</a>
+      <a routerLink="/menu" routerLinkActive="active-link" class="mobile-nav-link" (click)="closeMobileMenu()">Menu</a>
+      <a routerLink="/about" routerLinkActive="active-link" class="mobile-nav-link" (click)="closeMobileMenu()">About</a>
+      <a routerLink="/reservations" routerLinkActive="active-link" class="mobile-nav-link" (click)="closeMobileMenu()">Reservations</a>
+      <a routerLink="/table-qr" routerLinkActive="active-link" class="mobile-nav-link" (click)="closeMobileMenu()">Table QR</a>
+      <a routerLink="/cart" class="mobile-nav-link mobile-cart-link" (click)="closeMobileMenu()">
+        Cart (<span class="mobile-cart-count">{{ (cartCount$ | async) || 0 }}</span>)
+      </a>
+      <a routerLink="/reservations" class="btn btn-primary mobile-reserve-btn" (click)="closeMobileMenu()">Book Table</a>
+    </nav>
+  </div>
+</header>

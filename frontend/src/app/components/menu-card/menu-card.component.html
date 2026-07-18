@@ -1,0 +1,40 @@
+<div class="menu-card" [class.unavailable]="!item.available">
+  <div class="image-wrapper">
+    <img [src]="item.image || 'assets/placeholder-food.jpg'" [alt]="item.name" class="dish-image">
+    <div class="tags-container" *ngIf="item.tags && item.tags.length > 0">
+      <span *ngFor="let tag of item.tags" class="tag" [class]="'tag-' + tag">
+        {{ tag }}
+      </span>
+    </div>
+  </div>
+  
+  <div class="card-content">
+    <div class="header-row">
+      <h3 class="dish-name">{{ item.name }}</h3>
+      <span class="dish-price">{{ item.price | currency:'USD' }}</span>
+    </div>
+    
+    <p class="dish-desc">{{ item.description }}</p>
+    
+    <div class="action-row">
+      <span class="category-badge">{{ item.category }}</span>
+      
+      <button 
+        *ngIf="item.available; else soldOutBtn" 
+        class="add-to-cart-btn btn" 
+        [class.btn-success]="addedSuccessfully"
+        (click)="onAddToCart($event)">
+        <span *ngIf="!addedSuccessfully">Add To Cart</span>
+        <span *ngIf="addedSuccessfully" class="check-mark">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg> Added!
+        </span>
+      </button>
+      
+      <ng-template #soldOutBtn>
+        <button class="add-to-cart-btn btn sold-out" disabled>Sold Out</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

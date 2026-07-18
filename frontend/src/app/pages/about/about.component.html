@@ -1,0 +1,140 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     PAGE BANNER
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="page-banner">
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <span class="banner-subtitle">Discover</span>
+    <h1 class="banner-title">Our Story</h1>
+    <div class="banner-divider">
+      <span class="divider-diamond">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PHILOSOPHY & ORIGIN STORY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="philosophy-section">
+  <div class="container">
+    <div class="philosophy-grid">
+      <div class="philosophy-image-wrapper fade-in">
+        <div class="philosophy-image"></div>
+        <div class="image-accent-border"></div>
+      </div>
+
+      <div class="philosophy-content fade-in">
+        <span class="section-subtitle">The Meaning Behind the Name</span>
+        <h2 class="section-title">Kimaya — Divine Alchemy</h2>
+        <div class="gold-line"></div>
+        <p class="philosophy-text">
+          In ancient Sanskrit, <em>Kimaya</em> means <strong>divine alchemy</strong> — the sacred art of
+          transformation, where the ordinary becomes extraordinary through intention, mastery, and a touch of magic.
+        </p>
+        <p class="philosophy-text">
+          At Kimaya's Kitchen, we honour this meaning in every dish we create. Our restaurant was born from a
+          singular vision: to transform the rich, time-honoured recipes of India through the lens of modern
+          culinary innovation — preserving the soul of tradition while reimagining its expression.
+        </p>
+        <p class="philosophy-text">
+          Founded in 2018, Kimaya's Kitchen began as an intimate supper club where Chef Arjun Malhotra
+          would invite guests into a world where heritage spices met avant-garde techniques, where the warmth
+          of a family kitchen embraced the precision of fine dining. What started as a whispered secret among
+          food lovers has blossomed into a destination celebrated for its daring, its beauty, and its reverence
+          for the craft.
+        </p>
+        <p class="philosophy-text">
+          Every plate that leaves our kitchen carries within it a story — of grandmothers who ground spices by
+          hand at dawn, of bustling markets fragrant with cardamom and saffron, and of a new generation of chefs
+          who dare to dream in flavour. This is the magic of Kimaya: tradition, transformed.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MEET THE TEAM
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="team-section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-subtitle">The Artisans</span>
+      <h2 class="section-title">Meet Our Team</h2>
+      <div class="gold-line center"></div>
+      <p class="team-intro">
+        Behind every unforgettable meal is a team of passionate artisans who pour their heart, heritage,
+        and relentless creativity into the craft of cooking.
+      </p>
+    </div>
+
+    <div class="team-grid">
+      <div
+        class="team-card fade-in"
+        *ngFor="let member of teamMembers; let i = index"
+        [style.animationDelay]="(i * 0.15) + 's'"
+      >
+        <div class="team-image-wrapper">
+          <div class="team-image" [style.backgroundImage]="'url(' + member.image + ')'">
+            <div class="team-image-placeholder">
+              <span class="placeholder-icon">👨‍🍳</span>
+            </div>
+          </div>
+          <div class="team-image-overlay"></div>
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">{{ member.name }}</h3>
+          <span class="team-role">{{ member.role }}</span>
+          <p class="team-bio">{{ member.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CORE VALUES
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="values-section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-subtitle">What We Stand For</span>
+      <h2 class="section-title">Our Core Values</h2>
+      <div class="gold-line center"></div>
+    </div>
+
+    <div class="values-grid">
+      <div
+        class="value-card fade-in"
+        *ngFor="let value of coreValues; let i = index"
+        [style.animationDelay]="(i * 0.12) + 's'"
+      >
+        <div class="value-icon-wrapper">
+          <span class="value-icon">{{ value.icon }}</span>
+        </div>
+        <h3 class="value-title">{{ value.title }}</h3>
+        <p class="value-description">{{ value.description }}</p>
+        <div class="value-card-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CALL TO ACTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content fade-in">
+      <span class="section-subtitle">Experience the Magic</span>
+      <h2 class="cta-title">Ready to Begin Your Journey?</h2>
+      <p class="cta-text">
+        Reserve your table and let us take you on a culinary voyage where every flavour tells a story.
+      </p>
+      <div class="cta-buttons">
+        <a routerLink="/reservations" class="btn btn-primary">Reserve a Table</a>
+        <a routerLink="/menu" class="btn btn-secondary">Explore the Menu</a>
+      </div>
+    </div>
+  </div>
+</section>

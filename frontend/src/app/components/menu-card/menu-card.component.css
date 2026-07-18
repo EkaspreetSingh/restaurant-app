@@ -1,0 +1,174 @@
+.menu-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all var(--transition-normal);
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-lg);
+}
+
+.menu-card.unavailable {
+  opacity: 0.6;
+}
+
+/* Image styling */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 66%; /* 3:2 Aspect Ratio */
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+
+.dish-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.menu-card:hover .dish-image {
+  transform: scale(1.08);
+}
+
+/* Tags styling */
+.tags-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.6rem;
+  color: var(--color-bg-dark);
+}
+
+/* Luxury Tag Colors */
+.tag-vegetarian {
+  background-color: #22c55e; /* Green */
+  color: #fff;
+}
+
+.tag-chef-special {
+  background-color: var(--color-primary); /* Gold */
+  color: var(--color-bg-dark);
+}
+
+.tag-hot {
+  background-color: #ea580c; /* Fiery Orange */
+  color: #fff;
+}
+
+.tag-popular {
+  background-color: #a855f7; /* Purple */
+  color: #fff;
+}
+
+/* Card Content Details */
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+  gap: 1rem;
+}
+
+.dish-name {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  line-height: 1.3;
+}
+
+.dish-price {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.dish-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+/* Action button row */
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.category-badge {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.add-to-cart-btn {
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--color-primary);
+  color: var(--color-bg-dark);
+  border-color: var(--color-primary);
+}
+
+.add-to-cart-btn.btn-success {
+  background-color: var(--color-success);
+  color: white;
+  border-color: var(--color-success);
+  box-shadow: 0 0 10px rgba(22, 163, 74, 0.3);
+}
+
+.add-to-cart-btn.sold-out {
+  border-color: #3f3f46;
+  color: #71717a;
+  cursor: not-allowed;
+}
+.add-to-cart-btn.sold-out:hover {
+  background-color: transparent;
+  color: #71717a;
+}
+
+.check-mark {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
