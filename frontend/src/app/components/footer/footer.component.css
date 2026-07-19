@@ -35,9 +35,15 @@
 /* Brand styling */
 .footer-logo {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.footer-logo .logo-text-container {
+  display: flex;
   flex-direction: column;
   line-height: 1.1;
-  margin-bottom: 1.2rem;
 }
 .footer-logo .logo-main {
   font-family: var(--font-display);

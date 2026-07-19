@@ -33,24 +33,24 @@ export class AboutComponent {
     }
   ];
 
-  teamMembers = [
-    {
-      name: 'Chef Arjun Malhotra',
-      role: 'Executive Chef & Founder',
-      bio: 'With over two decades of culinary mastery spanning Michelin-starred kitchens in Mumbai, London, and New York, Chef Arjun brings a rare alchemy of tradition and avant-garde technique to every plate.',
-      image: 'assets/images/chef-arjun.jpg'
-    },
-    {
-      name: 'Priya Sharma',
-      role: 'Head Pastry Chef',
-      bio: 'Trained at Le Cordon Bleu and inspired by her grandmother\'s mithai recipes, Priya weaves Indian heritage into exquisite desserts that are as beautiful as they are unforgettable.',
-      image: 'assets/images/chef-priya.jpg'
-    },
-    {
-      name: 'Rohan Kapoor',
-      role: 'Sous Chef',
-      bio: 'A rising star with a passion for molecular gastronomy, Rohan transforms classic Indian comfort food into immersive multi-sensory experiences that delight and surprise.',
-      image: 'assets/images/chef-rohan.jpg'
-    }
-  ];
+ teamMembers = [
+  {
+    name: 'Chef Jasmine Sharma',
+    role: 'Lead Chef',
+    bio: 'With years of culinary experience, Chef Jasmine brings exceptional expertise to the team, having previously served as the Lead Chef at Chat Di Hatti.',
+    image: 'assets/images/chef-jasmine.jpg'
+  },
+  {
+    name: 'Unknown Chef',
+    role: 'Chef',
+    bio: 'Chef at Kimaya\'s Kitchen.',
+    image: 'assets/images/unknown-chef-1.jpg'
+  },
+  {
+    name: 'Unknown Chef',
+    role: 'Chef',
+    bio: 'Chef at Kimaya\'s Kitchen.',
+    image: 'assets/images/unknown-chef-2.jpg'
+  }
+];
 }
